@@ -29,8 +29,12 @@ refs.formElem.addEventListener('submit', async e => {
     showLoader();
     try {
       const data = await getPictures(searchQuery, currentPage);
+      console.log(data);
       maxPage = Math.ceil(data.totalHits / perPage);
-      if (data.hits.length !== 0) {
+      if (data.hits.length === 0) {
+        hideLoader();
+        iziToast.error(iziToastUnsuccessObj);
+      } else {
         const markup = imagesTemplate(data);
         refs.pixabayListElem.insertAdjacentHTML('afterbegin', markup);
         let gallery = new SimpleLightbox('.gallery-link', {
@@ -39,8 +43,6 @@ refs.formElem.addEventListener('submit', async e => {
         });
         gallery.refresh();
         showLoadMoreBtn();
-      } else {
-        iziToast.error(iziToastUnsuccessObj);
       }
     } catch {
       err => {
