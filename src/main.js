@@ -23,15 +23,17 @@ const perPage = 15;
 
 refs.formElem.addEventListener('submit', async e => {
   e.preventDefault();
+  hideLoadMoreBtn();
   refs.pixabayListElem.innerHTML = '';
   searchQuery = e.target.elements.query.value.trim();
+  console.log(searchQuery);
   if (searchQuery !== '') {
     showLoader();
     try {
       const data = await getPictures(searchQuery, currentPage);
       maxPage = Math.ceil(data.totalHits / perPage);
+      console.log(maxPage);
       if (data.hits.length === 0) {
-        hideLoadMoreBtn();
         hideLoader();
         iziToast.error(iziToastUnsuccessObj);
       } else {
