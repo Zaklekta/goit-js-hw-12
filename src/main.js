@@ -24,6 +24,7 @@ const perPage = 15;
 refs.formElem.addEventListener('submit', async e => {
   e.preventDefault();
   hideLoadMoreBtn();
+  currentPage = 1;
   refs.pixabayListElem.innerHTML = '';
   searchQuery = e.target.elements.query.value.trim();
   if (searchQuery !== '') {
