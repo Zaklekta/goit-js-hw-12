@@ -24,14 +24,14 @@ const perPage = 15;
 refs.formElem.addEventListener('submit', async e => {
   e.preventDefault();
   refs.pixabayListElem.innerHTML = '';
-  searchQuery = e.target.elements.query.value;
+  searchQuery = e.target.elements.query.value.trim();
   if (searchQuery !== '') {
     showLoader();
     try {
       const data = await getPictures(searchQuery, currentPage);
-      console.log(data);
       maxPage = Math.ceil(data.totalHits / perPage);
       if (data.hits.length === 0) {
+        hideLoadMoreBtn();
         hideLoader();
         iziToast.error(iziToastUnsuccessObj);
       } else {
