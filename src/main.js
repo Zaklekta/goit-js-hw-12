@@ -26,13 +26,11 @@ refs.formElem.addEventListener('submit', async e => {
   hideLoadMoreBtn();
   refs.pixabayListElem.innerHTML = '';
   searchQuery = e.target.elements.query.value.trim();
-  console.log(searchQuery);
   if (searchQuery !== '') {
     showLoader();
     try {
       const data = await getPictures(searchQuery, currentPage);
       maxPage = Math.ceil(data.totalHits / perPage);
-      console.log(maxPage);
       if (data.hits.length === 0) {
         hideLoader();
         iziToast.error(iziToastUnsuccessObj);
@@ -111,7 +109,6 @@ function updateLoadMoreBtnStatus() {
 function scrollPage() {
   const liElem = refs.pixabayListElem.children[0];
   const height = liElem.getBoundingClientRect().height;
-  console.log(height);
   scrollBy({
     top: height * 3,
     behavior: 'smooth',
