@@ -43,12 +43,12 @@ refs.formElem.addEventListener('submit', async e => {
           captionDelay: 250,
         });
         gallery.refresh();
-        showLoadMoreBtn();
+        if (maxPage !== currentPage) {
+          showLoadMoreBtn();
+        }
       }
-    } catch {
-      err => {
-        iziToast.error(iziToastErrorObj);
-      };
+    } catch (err) {
+      iziToast.error(iziToastErrorObj);
     }
     hideLoader();
   } else {
@@ -74,10 +74,8 @@ refs.loadMoreBtnElem.addEventListener('click', async () => {
     gallery.refresh();
     updateLoadMoreBtnStatus();
     hideLoader();
-  } catch {
-    err => {
-      iziToast.error(iziToastErrorObj);
-    };
+  } catch (err) {
+    iziToast.error(iziToastErrorObj);
   }
   hideLoader();
 });

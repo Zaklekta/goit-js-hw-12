@@ -18,6 +18,6 @@ export default async function getPictures(searchQuery, currentPage) {
     const response = await axios.get(`/api/?${params}`);
     return response.data;
   } catch (err) {
-    console.log(err);
+    iziToast.error(iziToastErrorObj);
   }
 }
